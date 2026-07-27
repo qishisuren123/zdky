@@ -1,0 +1,20 @@
+# Minimal dependencies for the AutoResearch V3 Python pipeline.
+# Optional GPU / Claude Code / GPT Researcher dependencies are managed separately.
+
+httpx>=0.27
+requests>=2.31
+beautifulsoup4>=4.12
+lxml>=5.0
+feedparser>=6.0
+arxiv>=2.1
+openreview-py>=1.44
+google-auth>=2.29
+pandas>=2.2
+numpy>=1.26
+pytest>=8.0
+
+# Optional: only required if you enable Twitter/X collection (config.example.json
+# twitter.enabled). Verify their licenses and current maintenance status yourself
+# before depending on them; usage is subject to X's Terms of Service.
+# Scweet
+# twikit

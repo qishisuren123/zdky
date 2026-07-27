@@ -1,0 +1,77 @@
+# Secrets and local credentials
+.env
+.env.*
+!.env.example
+config.json
+config.local.json
+*.local.json
+secrets.json
+credentials.json
+*credentials*.json
+*secret*.json
+*token*.json
+*.key
+*.pem
+*.p12
+*.pfx
+.netrc
+
+# Claude/local agent config
+.claude/
+**/.claude/
+settings.local.json
+**/settings.local.json
+
+# Cookies, auth/session state, social collectors
+twitter_cookies.json
+*cookies*.json
+*cookie*.json
+*session*.json
+scweet_state*.db
+*.sqlite
+*.sqlite3
+
+# Remote/private deployment configs
+AR-in-CC/config/remote.*.json
+!AR-in-CC/config/remote.example.json
+
+# Runtime outputs and logs
+logs/
+**/logs/
+*.log
+*.jsonl
+outputs/
+**/outputs/
+runs/
+artifacts/
+scratch/
+data/projects/*/results/
+data/projects/*/decisions.log
+data/projects/*/notifications.log
+data/projects/**/.conda-env/
+data/**/*.pt
+data/**/*.pth
+data/**/*.ckpt
+data/**/*.safetensors
+
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.venv/
+venv/
+env/
+
+# Node/build artifacts
+node_modules/
+dist/
+build/
+.next/
+.cache/
+
+# OS/editor
+.DS_Store
+.idea/
+.vscode/

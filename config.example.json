@@ -1,0 +1,93 @@
+{
+  "version": "open-source-template-v1",
+  "notes": [
+    "Copy this file to config.local.json or another ignored path, then fill in your own provider credentials.",
+    "Do not put real API keys, passwords, cookies, auth tokens, or service-account JSON content in files committed to Git.",
+    "The runtime can be pointed at this file with AUTORESEARCH_CONFIG=/path/to/config.local.json."
+  ],
+  "presets": {
+    "gemini-3.1-flash-lite": {
+      "provider": "google_openai_compat",
+      "base_url": "https://generativelanguage.googleapis.com/v1beta/openai/",
+      "model": "gemini-3.1-flash-lite",
+      "api_key_env": "GEMINI_API_KEY",
+      "needs_proxy": false
+    },
+    "gemini-3.1-pro": {
+      "provider": "google_openai_compat",
+      "base_url": "https://generativelanguage.googleapis.com/v1beta/openai/",
+      "model": "gemini-3.1-pro",
+      "api_key_env": "GEMINI_API_KEY",
+      "needs_proxy": false
+    },
+    "claude-opus": {
+      "provider": "anthropic_messages",
+      "base_url_env": "ANTHROPIC_BASE_URL",
+      "model": "claude-opus-4-8",
+      "auth_token_env": "ANTHROPIC_API_KEY",
+      "needs_proxy": false
+    },
+    "claude-sonnet": {
+      "provider": "anthropic_messages",
+      "base_url_env": "ANTHROPIC_BASE_URL",
+      "model": "claude-sonnet-5",
+      "auth_token_env": "ANTHROPIC_API_KEY",
+      "needs_proxy": false
+    },
+    "gpt-5.5": {
+      "provider": "openai_chat_completions",
+      "base_url_env": "OPENAI_BASE_URL",
+      "model": "gpt-5.5",
+      "api_key_env": "OPENAI_API_KEY",
+      "needs_proxy": false
+    },
+    "deepseek-chat": {
+      "provider": "openai_chat_completions",
+      "base_url": "https://api.deepseek.com/v1",
+      "model": "deepseek-chat",
+      "api_key_env": "DEEPSEEK_API_KEY",
+      "needs_proxy": false
+    },
+    "qwen-max": {
+      "provider": "openai_chat_completions",
+      "base_url": "https://dashscope.aliyuncs.com/compatible-mode/v1",
+      "model": "qwen-max",
+      "api_key_env": "DASHSCOPE_API_KEY",
+      "needs_proxy": false
+    },
+    "siliconflow": {
+      "provider": "openai_chat_completions",
+      "base_url": "https://api.siliconflow.cn/v1",
+      "model": "replace-with-your-siliconflow-model",
+      "api_key_env": "SILICONFLOW_API_KEY",
+      "needs_proxy": false
+    }
+  },
+  "aliases": {
+    "gemini-flash": "gemini-3.1-flash-lite",
+    "gemini-pro": "gemini-3.1-pro",
+    "claude-opus": "claude-opus",
+    "claude-sonnet": "claude-sonnet",
+    "gpt-5.5": "gpt-5.5",
+    "deepseek": "deepseek-chat",
+    "qwen": "qwen-max",
+    "siliconflow": "siliconflow"
+  },
+  "idea_forge": {
+    "idea_models": ["gemini-pro", "gpt-5.5", "claude-opus"],
+    "plan_model": "gpt-5.5"
+  },
+  "vertex_gemini": {
+    "service_account_env": "GOOGLE_APPLICATION_CREDENTIALS",
+    "project_id_env": "GEMINI_VERTEX_PROJECT_ID",
+    "location_env": "GEMINI_VERTEX_LOCATION"
+  },
+  "twitter": {
+    "enabled": false,
+    "email_env": "TWITTER_EMAIL",
+    "username_env": "TWITTER_USERNAME",
+    "password_env": "TWITTER_PASSWORD",
+    "auth_token_env": "TWITTER_AUTH_TOKEN",
+    "cookies_path_env": "TWITTER_COOKIES_PATH"
+  }
+}
