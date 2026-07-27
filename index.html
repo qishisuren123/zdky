@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>AutoResearch V3 — idea-generation pipeline</title>
+<meta name="description" content="Open-source AutoResearch V3 idea-generation pipeline: multi-source signal collection, multi-model idea forging, cross-validation. Run it with a single OpenAI-compatible API." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#05070f; --panel:#0d1424; --text:#eef1f7; --muted:#8b94a7;
+    --blue:#6ea8fe; --violet:#b79cff; --green:#3ddc97; --line:#1e2a44;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,system-ui,sans-serif;line-height:1.6}
+  a{color:var(--blue);text-decoration:none}
+  a:hover{text-decoration:underline}
+  .wrap{max-width:880px;margin:0 auto;padding:0 24px}
+  header{padding:80px 0 40px}
+  .kicker{font-family:'Space Grotesk',sans-serif;font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+  h1{font-family:'Space Grotesk',sans-serif;font-size:40px;line-height:1.15;margin:12px 0 16px;
+     background:linear-gradient(90deg,var(--blue),var(--violet));-webkit-background-clip:text;background-clip:text;color:transparent}
+  .lede{font-size:18px;color:var(--muted);max-width:640px}
+  .cta{margin-top:28px;display:flex;gap:12px;flex-wrap:wrap}
+  .btn{display:inline-block;padding:10px 18px;border-radius:8px;font-weight:600;font-size:14px}
+  .btn.primary{background:var(--blue);color:#04070f}
+  .btn.primary:hover{text-decoration:none;opacity:.9}
+  .btn.ghost{border:1px solid var(--line);color:var(--text)}
+  .btn.ghost:hover{text-decoration:none;border-color:var(--blue)}
+  section{padding:36px 0;border-top:1px solid var(--line)}
+  h2{font-family:'Space Grotesk',sans-serif;font-size:22px;margin-bottom:14px}
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;margin-top:16px}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:18px}
+  .card h3{margin:0 0 8px;font-size:15px;color:var(--text)}
+  .card p{margin:0;font-size:14px;color:var(--muted)}
+  code, pre{font-family:ui-monospace,Menlo,Consolas,monospace}
+  pre{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:16px;overflow-x:auto;font-size:13.5px}
+  .note{background:rgba(255,209,102,.08);border:1px solid rgba(255,209,102,.25);border-radius:10px;padding:14px 16px;font-size:14px;color:#e8d9a8}
+  .scope{font-size:14px;color:var(--muted)}
+  .scope li{margin-bottom:6px}
+  footer{padding:40px 0 80px;color:var(--muted);font-size:13px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="kicker">Open source · idea-generation pipeline</div>
+    <h1>AutoResearch V3</h1>
+    <p class="lede">Turns multi-source research signals — papers, forums, blogs, AI media, trending repos — into candidate research ideas, then cross-validates the strongest ones across multiple LLMs.</p>
+    <div class="cta">
+      <a class="btn primary" href="https://github.com/qishisuren123/zdky">View on GitHub</a>
+      <a class="btn ghost" href="https://github.com/qishisuren123/zdky#readme">Read the docs</a>
+    </div>
+  </header>
+
+  <section>
+    <h2>What's actually in this repository</h2>
+    <p class="lede" style="font-size:15px">This is the <strong>idea-generation pipeline only</strong>: signal collection, filtering, and multi-model idea forging. It does not include a downstream execution runtime that turns an idea into code/experiments — that hasn't been open-sourced.</p>
+    <div class="grid">
+      <div class="card">
+        <h3>Signal collectors</h3>
+        <p>arXiv, HuggingFace Daily Papers, OpenReview, RSS feeds, Hacker News, GitHub Trending — mostly official APIs.</p>
+      </div>
+      <div class="card">
+        <h3>Idea Forge</h3>
+        <p>Multi-model idea generation, 3-reviewer cross-validation (≥2/3 to pass), freshness refresh, plan drafting.</p>
+      </div>
+      <div class="card">
+        <h3>Multi-provider LLM client</h3>
+        <p>Anthropic Messages API, OpenAI Chat Completions, Gemini API key or Vertex — configured entirely via environment variables.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Run it with one API</h2>
+    <p class="lede" style="font-size:15px">If you only have a single OpenAI-compatible endpoint, three environment variables are enough to run the full pipeline end to end.</p>
+    <pre>export AUTORESEARCH_API_BASE_URL=https://your-provider.example.com/v1
+export AUTORESEARCH_API_KEY=your_api_key_here
+export AUTORESEARCH_API_MODEL=your-model-name   # optional
+
+pip install -r requirements.txt
+python daily_full.py</pre>
+    <div class="note">
+      Trade-off: the idea-review step is designed as a 3-independent-model cross-validation panel to reduce single-model bias. In this single-endpoint mode, all three reviewer roles route to the same model — you get 3 review passes from one model, not genuine cross-model review. See <a href="https://github.com/qishisuren123/zdky/blob/main/docs/open_source_scope_notes.md">open_source_scope_notes.md</a> for the full list of behavior differences in this mode.
+    </div>
+  </section>
+
+  <section>
+    <h2>Scope notes — what's excluded, and why</h2>
+    <ul class="scope">
+      <li>No downstream execution runtime (code/experiments/results) — this release stops at idea + plan generation.</li>
+      <li><code>knowledge_base/</code> domain-knowledge files are not included; code degrades gracefully (empty context) without them — bring your own.</li>
+      <li>No bundled research-report generator or coding-agent runtime — those are separate systems, excluded pending licensing/provenance review.</li>
+      <li>Two collectors touch sites with anti-scraping measures or unofficial APIs (Chinese AI media via Jina Reader, X/Twitter via Scweet/twikit). Both are clearly flagged in their docstrings and the Twitter path is disabled by default.</li>
+    </ul>
+  </section>
+
+  <footer>
+    MIT licensed. See the <a href="https://github.com/qishisuren123/zdky">repository</a> for full source, docs, and third-party notices.
+  </footer>
+</div>
+</body>
+</html>
