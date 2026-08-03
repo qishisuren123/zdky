@@ -75,6 +75,8 @@ def main() -> int:
         if path == root:
             continue
         rel = path.relative_to(root).as_posix()
+        if rel == ".git" or rel.startswith(".git/"):
+            continue
         if matches(rel, ALLOW_PATTERNS):
             continue
         if matches(rel, BLOCKED_PATTERNS):
